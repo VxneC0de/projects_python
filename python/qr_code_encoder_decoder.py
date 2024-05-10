@@ -1,11 +1,8 @@
+#FirstCode
+
 #import qrcode
 
 #data = 'Don\'t forget to subscribe'
-
-from pyzbar.pyzbar import decode
-from PIL import Image
-
-#FirstCode
 
 #img = qrcode.make(data)
 
@@ -14,6 +11,10 @@ from PIL import Image
 
 
 #SecondCode
+
+#import qrcode
+
+#data = 'Don\'t forget to subscribe'
 
 #qr = qrcode.QRCode(version = 1, box_size=10, border=5)
 
@@ -28,6 +29,8 @@ from PIL import Image
 
 #ThirdCode
 
+from pyzbar.pyzbar import decode
+from PIL import Image
 
 img = Image.open('C:/Users/Vanesa/VxneC0de/projects_python/save/myqrcode1.png')
 
