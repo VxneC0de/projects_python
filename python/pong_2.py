@@ -1,5 +1,6 @@
 import turtle
-import os
+import winsound
+
 
 wn = turtle.Screen()
 wn.title("Pong")
@@ -77,9 +78,18 @@ wn.onkeypress(paddle_a_down, "s")
 wn.onkeypress(paddle_b_up, "Up")
 wn.onkeypress(paddle_b_down, "Down")
 
+#Codigo adicional
+running = True
+def is_running():
+    try:
+        wn.update()
+        return True
+    except turtle.Terminator:
+        return False
+
 # Main game loop
-while True:
-    wn.update()
+def game_loop():
+    global score_a, score_b
     
     # Move the ball
     ball.setx(ball.xcor() + ball.dx)
@@ -91,12 +101,12 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
-        os.system("afplay bounce.wav&")
+        winsound.PlaySound("bounce.wav", winsound.SND_FILENAME)
     
     elif ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
-        os.system("afplay bounce.wav&")
+        winsound.PlaySound("bounce.wav", winsound.SND_FILENAME)
 
     # Left and right
     if ball.xcor() > 350:
@@ -116,9 +126,17 @@ while True:
     # Paddle and ball collisions
     if ball.xcor() < -340 and ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() - 50:
         ball.dx *= -1 
-        os.system("afplay bounce.wav&")
+        winsound.PlaySound("bounce.wav", winsound.SND_FILENAME)
     
     elif ball.xcor() > 340 and ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50:
         ball.dx *= -1
-        os.system("afplay bounce.wav&")
+        winsound.PlaySound("bounce.wav", winsound.SND_FILENAME)
+        
+    # Call game_loop again after 20 milliseconds
+    wn.ontimer(game_loop, 20)
     
+# Start the game loop
+game_loop()
+
+# Start the turtle main loop
+turtle.mainloop()
