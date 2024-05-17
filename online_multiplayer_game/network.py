@@ -14,13 +14,24 @@ class Network:
         
     def getPos(self):
         return self.pos
-        
+   
     def connect(self):
         try:
             self.client.connect(self.addr)
             return self.client.recv(2048).decode()
         except:
             pass
+  
+        
+        """  
+        def connect(self):
+            try:
+                self.client.connect(self.addr)
+                return self.client.recv(2048).decode()
+            except Exception as e:
+                print(f"Error al conectar: {e}")
+                return "0,0" #Devuelve una posición
+        """
         
     def send(self, data):
         try:
